@@ -14,7 +14,6 @@ class Comment
   end
  
   def self.array_of_comments
-    puts "hey"
     @@array_of_comments
   end
 
