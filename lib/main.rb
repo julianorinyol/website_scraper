@@ -7,18 +7,6 @@ require 'pry'
 
 
 
-=begin
-norwedgian = Post.new '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
-
-
-norwedgian.add_comment
-norwedgian.comments
-
-=end
-
-# https://news.ycombinator.com/item?id=9182368
-
-# binding.pry
 
 url_to_scrape = '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
 doc = Nokogiri::HTML(File.open(url_to_scrape))

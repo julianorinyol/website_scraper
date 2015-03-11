@@ -3,17 +3,6 @@ require 'pry'
 class Post
   attr_reader :title, :linked_url, :points, :item_id, :url_to_scrape
   
-  # def initialize(url_to_scrape)
-  #   doc = Nokogiri::HTML(File.open(url_to_scrape))
-
-  #   @title = doc.search('.title > a').map { |link| link.inner_text}
-  #   @linked_url = doc.search('.title > a').map { |link| link['href']}
-  #   @points = doc.search('.subtext > span:first-child').map { |span| span.inner_text}
-  #   @item_id = doc.search('.subtext > a:nth-child(3)').map {|link| link['href'] }
-  #   @doc = doc
-  #   comments_to_obj
-  # end 
-
   def initialize(title, linked_url, points, item_id, parsed_doc)
    
 
@@ -24,8 +13,6 @@ class Post
     @doc = parsed_doc
     comments_to_obj
   end
-
-
 
 
 
