@@ -3,14 +3,15 @@ require 'pry'
 class Post
   attr_reader :title, :linked_url, :points, :item_id, :url_to_scrape
   
-  def initialize(title, linked_url, points, item_id, parsed_doc)
-   
-
+  def initialize(title, linked_url, points, item_id, parsed_doc, usernames = nil, comment_text = nil, comment_times = nil)
     @title = title
     @linked_url = linked_url
     @points = points
     @item_id = item_id
     @doc = parsed_doc
+    @usernames = usernames
+    @comment_text = comment_text
+    @comment_times = comment_times
     comments_to_obj
   end
 
