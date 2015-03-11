@@ -11,9 +11,8 @@ require 'pry'
 norwedgian = Post.new '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
 
 
-
+norwedgian.add_comment
+norwedgian.comments
 # https://news.ycombinator.com/item?id=9182368
 
-
-puts norwedgian.title
-binding.pry
+# binding.pry

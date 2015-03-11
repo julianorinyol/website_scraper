@@ -49,15 +49,16 @@ arr_of_times = doc.search('.comhead > a:nth-child(2)').map { |element| element.i
 
 # for text
 class Comment
-  @@comments = []
-  def initialize username, time, text
+  @@comment_array = []
+  attr_reader :text
+  def initialize username = nil, time = nil, text
     @username = username
     @time = time
     @text = text
-    @@comments << self
+    @@comment_array << self
   end
-  def self.comment_array_return
-    @@comments
+  def self.comment_array
+    @@comment_array
   end
 end
 
@@ -68,9 +69,13 @@ while i < arr_of_text.length
 end
 
 
+bla = Comment.new "heyheyhey"
+p bla.text
 
-binding.pry
+# p Comment.comment_array
 
-# for times
-pp arr_of_text
-binding.pry
+
+# Comment.comment_array.each do |comment_obj|
+#       puts comment_obj.text
+#       # puts "\n\n #{comment_obj.text}"
+# end

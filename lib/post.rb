@@ -11,27 +11,36 @@ class Post
     @points = doc.search('.subtext > span:first-child').map { |span| span.inner_text}
     @item_id = doc.search('.subtext > a:nth-child(3)').map {|link| link['href'] }
     @doc = doc
+    comments_to_obj
   end
 
 
   def comments
+    Comment.array_of_comments.each do |comment_obj|
+      puts "\n\n #{comment_obj.text}"
+    end
+  end
+
+  def comments_to_obj
     arr_usernames =  @doc.search('.comhead > a:first-child').map { |element| element.inner_text}
     arr_of_text = @doc.search('.comment > font').map { |element| element.inner_text}
     arr_of_times = @doc.search('.comhead > a:nth-child(2)').map { |element| element.inner_text}
-
-
+    
     i = 0
     while i < arr_of_text.length
       Comment.new arr_usernames[i], arr_of_times[i], arr_of_text[i]
       i += 1 
     end
-
-    return Comment.array_of_comments
   end
 
-  def add_comment(comment_obj)
+
+  def add_comment
     #takes a comment object as its input and adds it to the comment list
 
+    puts "\n\nwhat is your comment?"
+
+    user_response = STDIN.gets.chomp
+    a = Comment.new user_response
   end
 end
 
