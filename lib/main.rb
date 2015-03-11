@@ -16,3 +16,4 @@ norwedgian = Post.new '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html
 
 
 puts norwedgian.title
+binding.pry

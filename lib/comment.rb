@@ -1,7 +1,7 @@
 
 class Comment
 
-  @@array_of_comments
+  @@array_of_comments =[]
    def initialize username, time, text
     @username = username
     @time = time
@@ -10,8 +10,8 @@ class Comment
     # @sub_comment_array = sub_comment_array
   end
  
-  def self.comment_array_return
-    @@comments
+  def self.array_of_comments
+    @@array_of_comments
   end
 
 end

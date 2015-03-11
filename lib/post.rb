@@ -2,7 +2,7 @@ require 'pry'
 
 class Post
   attr_reader :title, :linked_url, :points, :item_id, :url_to_scrape
-  @@array_of_comments = []
+  
   def initialize(url_to_scrape)
     doc = Nokogiri::HTML(File.open(url_to_scrape))
 
@@ -10,7 +10,7 @@ class Post
     @linked_url = doc.search('.title > a').map { |link| link['href']}
     @points = doc.search('.subtext > span:first-child').map { |span| span.inner_text}
     @item_id = doc.search('.subtext > a:nth-child(3)').map {|link| link['href'] }
-    @doc = url_to_scrape 
+    @doc = doc
   end
 
 
@@ -26,7 +26,7 @@ class Post
       i += 1 
     end
 
-    return @@array_of_comments
+    return Comment.array_of_comments
   end
 
   def add_comment(comment_obj)
