@@ -6,7 +6,9 @@ require 'nokogiri'
 require 'pry'
 
 
-url_to_scrape = '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
+# url_to_scrape = '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
+url_to_scrape = ARGV[0]
+
 doc = Nokogiri::HTML(File.open(url_to_scrape))
 
  title = doc.search('.title > a').map { |link| link.inner_text}
@@ -19,10 +21,23 @@ usernames =  doc.search('.comhead > a:first-child').map { |element| element.inne
 comment_times = doc.search('.comhead > a:nth-child(2)').map { |element| element.inner_text}
 comment_text = doc.search('.comment > font').map { |element| element.inner_text}
 
-   
-norwedgian = Post.new(title, linked_url, points, item_id, parsed_doc, usernames, comment_times, comment_text)
 
-binding.pry
-norwedgian.add_comment
-norwedgian.comments
+new_post = Post.new(title, linked_url, points, item_id, parsed_doc, usernames, comment_times, comment_text)
+
+# binding.pry
+
+puts "type 'comments' or 'add_comment'"
+user_input = STDIN.gets.chomp
+case user_input
+  when 'comments'
+    new_post.comments
+  when 'add_comment'
+    new_post.add_comment
+    new_post.comments
+  else
+    puts "type 'comments' or 'add_comment'"
+    user_input = STDIN.gets.chomp
+end
+
+
 
