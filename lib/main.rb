@@ -1,15 +1,20 @@
 require_relative 'post.rb'
 require_relative 'comment.rb'
 # require_relative 'post.html'
-# require 'active_support/all'
+require 'active_support/all'
 require 'nokogiri'
 require 'pry'
-
+require 'rubygems'
+require 'open-uri'
 
 # url_to_scrape = '/home/julian/Documents/Lighthouse/w2/d3/scraper/post.html'
 url_to_scrape = ARGV[0]
+# url_to_scrape = "https://news.ycombinator.com/item?id=9185526"
 
-doc = Nokogiri::HTML(File.open(url_to_scrape))
+
+doc = Nokogiri::HTML(open(url_to_scrape))
+# doc = Nokogiri::HTML(open("https://news.ycombinator.com/item?id=9185526"))
+
 
  title = doc.search('.title > a').map { |link| link.inner_text}
  linked_url = doc.search('.title > a').map { |link| link['href']}
