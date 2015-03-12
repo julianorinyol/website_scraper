@@ -3,7 +3,7 @@ require 'pry'
 class Post
   attr_reader :title, :linked_url, :points, :item_id, :url_to_scrape
   
-  def initialize(title, linked_url, points, item_id, parsed_doc, usernames = nil, comment_text = nil, comment_times = nil)
+  def initialize(title, linked_url, points, item_id, parsed_doc, usernames, comment_times, comment_text)
     @title = title
     @linked_url = linked_url
     @points = points
@@ -12,25 +12,23 @@ class Post
     @usernames = usernames
     @comment_text = comment_text
     @comment_times = comment_times
-    comments_to_obj
+    comments_to_obj(usernames,comment_times, comment_text)
   end
 
 
 
   def comments
+    # binding.pry
     Comment.array_of_comments.each do |comment_obj|
       puts "\n\n #{comment_obj.text}"
     end
   end
 
-  def comments_to_obj
-    arr_usernames =  @doc.search('.comhead > a:first-child').map { |element| element.inner_text}
-    arr_of_text = @doc.search('.comment > font').map { |element| element.inner_text}
-    arr_of_times = @doc.search('.comhead > a:nth-child(2)').map { |element| element.inner_text}
+  def comments_to_obj(usernames, comment_times, comment_text)
     
     i = 0
-    while i < arr_of_text.length
-      Comment.new arr_usernames[i], arr_of_times[i], arr_of_text[i]
+    while i < usernames.length
+      Comment.new usernames[i], comment_times[i], comment_text[i]
       i += 1 
     end
   end
